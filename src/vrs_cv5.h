@@ -7,7 +7,7 @@
 
 #ifndef VRS_CV5_H_
 #define VRS_CV5_H_
-
+void ADC_init();
 
 
 #endif /* VRS_CV5_H_ */

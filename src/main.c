@@ -29,6 +29,7 @@ SOFTWARE.
 /* Includes */
 #include <stddef.h>
 #include "stm32l1xx.h"
+#include <vrs_cv5.h>
 
 
 /* Private typedef */
@@ -69,7 +70,7 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-
+  ADC_init();
   /* Infinite loop */
   while (1)
   {
