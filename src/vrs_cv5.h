@@ -7,9 +7,9 @@
 
 #ifndef VRS_CV5_H_
 #define VRS_CV5_H_
-uint32_t value;
+int value;
 char Rec;
-char send[5];
+char send[8];
 
 
 void ADC_init();

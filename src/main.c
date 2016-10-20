@@ -30,6 +30,9 @@ SOFTWARE.
 #include <stddef.h>
 #include "stm32l1xx.h"
 #include <vrs_cv5.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 
 /* Private typedef */
@@ -50,6 +53,7 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
+  int m=0;
 
   /**
   *  IMPORTANT NOTE!
@@ -76,11 +80,15 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	if (Rec == 'm')
-	{
-		GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
-	 	Rec = ' ';
-	}
+	  for(int i = 0; i < 100000;i++);
+	  if (Rec == 'm')
+	  {
+		  m =! m;
+	 	  Rec = ' ';
+	  }
+	  sprintf(send,"%d",value);
+	  Send_data(send);
+
   }
   return 0;
 }

@@ -7,6 +7,8 @@
 #include <stddef.h>
 #include "stm32l1xx.h"
 #include <vrs_cv5.h>
+#include <stdlib.h>
+#include <string.h>
 
 void ADC_init()
 	{
@@ -142,7 +144,7 @@ void Send_data(char send[])
 		while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 		j++;
 	}
-	USART_SendData(USART2,'\n');
+	USART_SendData(USART2,'\r');
 	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 }
 
