@@ -90,7 +90,7 @@ void blikanie(uint32_t cas)
 		  GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
 }
 
-void initUSART2(void)
+void usart_init()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
@@ -131,4 +131,26 @@ void initUSART2(void)
 
 		USART_Cmd(USART2, ENABLE);
 
+}
+
+void Send_data(char send[])
+{
+	int j =0;
+	while(send[j] != 0)
+	{
+		USART_SendData(USART2, send[j]);
+		while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
+		j++;
+	}
+	USART_SendData(USART2,'\n');
+	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
+}
+
+void USART2_IRQHandler(void)
+{
+	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
+	{
+		USART_ClearITPendingBit(USART2, USART_IT_RXNE);
+		Rec = USART_ReceiveData(USART2);
+    }
 }

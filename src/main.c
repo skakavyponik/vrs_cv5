@@ -72,10 +72,15 @@ int main(void)
 
   ADC_init();
   Dio_init();
+  usart_init();
   /* Infinite loop */
   while (1)
   {
-	blikanie(value*600);
+	if (Rec == 'm')
+	{
+		GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
+	 	Rec = ' ';
+	}
   }
   return 0;
 }
