@@ -71,10 +71,11 @@ int main(void)
   /* TODO - Add your application code here */
 
   ADC_init();
+  Dio_init();
   /* Infinite loop */
   while (1)
   {
-	i++;
+	blikanie(value*600);
   }
   return 0;
 }
