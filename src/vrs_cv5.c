@@ -35,15 +35,9 @@ void ADC_init()
 			 ADC_Init(ADC1, &ADC_InitStructure);
 			/* ADCx regular channel8 configuration */
 			 ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_16Cycles);
-			 /* Enable the ADC */
-			 ADC_Cmd(ADC1, ENABLE);
-			 /* Wait until the ADC1 is ready */
+
 			 ADC_ITConfig(ADC1,ADC_IT_EOC,ENABLE);
-			 while(ADC_GetFlagStatus(ADC1, ADC_FLAG_ADONS) == RESET)
-			 	 {
-			 	 }
-			 	 /* Start ADC Software Conversion */
-			 	 ADC_SoftwareStartConv(ADC1);
+
 
 			 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 			 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -53,7 +47,14 @@ void ADC_init()
 			 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 			 	NVIC_Init(&NVIC_InitStructure);
 
-
+			 	/* Enable the ADC */
+			 	ADC_Cmd(ADC1, ENABLE);
+			 	/* Wait until the ADC1 is ready */
+			 	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_ADONS) == RESET)
+			 	{
+			 	}
+			 	/* Start ADC Software Conversion */
+			 	ADC_SoftwareStartConv(ADC1);
 	}
 
 void ADC1_IRQHandler(void)

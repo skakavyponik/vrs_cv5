@@ -2299,54 +2299,55 @@ void ADC_init()
  8000bf6:	2100      	movs	r1, #0
  8000bf8:	4816      	ldr	r0, [pc, #88]	; (8000c54 <ADC_init+0xd4>)
  8000bfa:	f7ff fbc1 	bl	8000380 <ADC_RegularChannelConfig>
-			 /* Enable the ADC */
-			 ADC_Cmd(ADC1, ENABLE);
- 8000bfe:	2101      	movs	r1, #1
- 8000c00:	4814      	ldr	r0, [pc, #80]	; (8000c54 <ADC_init+0xd4>)
- 8000c02:	f7ff fba1 	bl	8000348 <ADC_Cmd>
-			 /* Wait until the ADC1 is ready */
+
 			 ADC_ITConfig(ADC1,ADC_IT_EOC,ENABLE);
- 8000c06:	2201      	movs	r2, #1
- 8000c08:	f240 2105 	movw	r1, #517	; 0x205
- 8000c0c:	4811      	ldr	r0, [pc, #68]	; (8000c54 <ADC_init+0xd4>)
- 8000c0e:	f7ff fd39 	bl	8000684 <ADC_ITConfig>
-			 while(ADC_GetFlagStatus(ADC1, ADC_FLAG_ADONS) == RESET)
- 8000c12:	bf00      	nop
- 8000c14:	2140      	movs	r1, #64	; 0x40
- 8000c16:	480f      	ldr	r0, [pc, #60]	; (8000c54 <ADC_init+0xd4>)
- 8000c18:	f7ff fd5c 	bl	80006d4 <ADC_GetFlagStatus>
- 8000c1c:	4603      	mov	r3, r0
- 8000c1e:	2b00      	cmp	r3, #0
- 8000c20:	d0f8      	beq.n	8000c14 <ADC_init+0x94>
-			 	 {
-			 	 }
-			 	 /* Start ADC Software Conversion */
-			 	 ADC_SoftwareStartConv(ADC1);
- 8000c22:	480c      	ldr	r0, [pc, #48]	; (8000c54 <ADC_init+0xd4>)
- 8000c24:	f7ff fd12 	bl	800064c <ADC_SoftwareStartConv>
+ 8000bfe:	2201      	movs	r2, #1
+ 8000c00:	f240 2105 	movw	r1, #517	; 0x205
+ 8000c04:	4813      	ldr	r0, [pc, #76]	; (8000c54 <ADC_init+0xd4>)
+ 8000c06:	f7ff fd3d 	bl	8000684 <ADC_ITConfig>
+
 
 			 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
- 8000c28:	f44f 7040 	mov.w	r0, #768	; 0x300
- 8000c2c:	f7ff faa6 	bl	800017c <NVIC_PriorityGroupConfig>
+ 8000c0a:	f44f 7040 	mov.w	r0, #768	; 0x300
+ 8000c0e:	f7ff fab5 	bl	800017c <NVIC_PriorityGroupConfig>
 			 	NVIC_InitTypeDef NVIC_InitStructure;
 			 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn ; //zoznam prerušení nájdete v súbore stm32l1xx.h
- 8000c30:	2312      	movs	r3, #18
- 8000c32:	713b      	strb	r3, [r7, #4]
+ 8000c12:	2312      	movs	r3, #18
+ 8000c14:	713b      	strb	r3, [r7, #4]
 			 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
- 8000c34:	2301      	movs	r3, #1
- 8000c36:	717b      	strb	r3, [r7, #5]
+ 8000c16:	2301      	movs	r3, #1
+ 8000c18:	717b      	strb	r3, [r7, #5]
 			 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
- 8000c38:	2300      	movs	r3, #0
- 8000c3a:	71bb      	strb	r3, [r7, #6]
+ 8000c1a:	2300      	movs	r3, #0
+ 8000c1c:	71bb      	strb	r3, [r7, #6]
 			 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
- 8000c3c:	2301      	movs	r3, #1
- 8000c3e:	71fb      	strb	r3, [r7, #7]
+ 8000c1e:	2301      	movs	r3, #1
+ 8000c20:	71fb      	strb	r3, [r7, #7]
 			 	NVIC_Init(&NVIC_InitStructure);
- 8000c40:	1d3b      	adds	r3, r7, #4
- 8000c42:	4618      	mov	r0, r3
- 8000c44:	f7ff faac 	bl	80001a0 <NVIC_Init>
+ 8000c22:	1d3b      	adds	r3, r7, #4
+ 8000c24:	4618      	mov	r0, r3
+ 8000c26:	f7ff fabb 	bl	80001a0 <NVIC_Init>
 
-
+			 	/* Enable the ADC */
+			 	ADC_Cmd(ADC1, ENABLE);
+ 8000c2a:	2101      	movs	r1, #1
+ 8000c2c:	4809      	ldr	r0, [pc, #36]	; (8000c54 <ADC_init+0xd4>)
+ 8000c2e:	f7ff fb8b 	bl	8000348 <ADC_Cmd>
+			 	/* Wait until the ADC1 is ready */
+			 	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_ADONS) == RESET)
+ 8000c32:	bf00      	nop
+ 8000c34:	2140      	movs	r1, #64	; 0x40
+ 8000c36:	4807      	ldr	r0, [pc, #28]	; (8000c54 <ADC_init+0xd4>)
+ 8000c38:	f7ff fd4c 	bl	80006d4 <ADC_GetFlagStatus>
+ 8000c3c:	4603      	mov	r3, r0
+ 8000c3e:	2b00      	cmp	r3, #0
+ 8000c40:	d0f8      	beq.n	8000c34 <ADC_init+0xb4>
+			 	{
+			 	}
+			 	/* Start ADC Software Conversion */
+			 	ADC_SoftwareStartConv(ADC1);
+ 8000c42:	4804      	ldr	r0, [pc, #16]	; (8000c54 <ADC_init+0xd4>)
+ 8000c44:	f7ff fd02 	bl	800064c <ADC_SoftwareStartConv>
 	}
  8000c48:	bf00      	nop
  8000c4a:	3728      	adds	r7, #40	; 0x28
