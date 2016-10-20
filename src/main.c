@@ -54,6 +54,8 @@ int main(void)
 {
   int i = 0;
   int m=0;
+  float ad_const=3.3/4096;
+  float V_value;
 
   /**
   *  IMPORTANT NOTE!
@@ -86,7 +88,15 @@ int main(void)
 		  m =! m;
 	 	  Rec = ' ';
 	  }
-	  sprintf(send,"%d",value);
+	  if (m)
+	  {
+		  sprintf(send,"%d",value);
+	  }
+	  else
+	  {
+		  V_value= value*ad_const;
+		  sprintf(send,"%d.%dV", (int)V_value, ((int)(V_value*100))-(int)V_value);
+	  }
 	  Send_data(send);
 
   }
