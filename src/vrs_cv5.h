@@ -7,6 +7,14 @@
 
 #ifndef VRS_CV5_H_
 #define VRS_CV5_H_
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stddef.h>
+#include "stm32l1xx.h"
+
+
 int value;
 char Rec;
 char send[8];

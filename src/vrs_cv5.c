@@ -4,11 +4,8 @@
  *  Created on: 18. 10. 2016
  *      Author: Juraj B
  */
-#include <stddef.h>
-#include "stm32l1xx.h"
 #include <vrs_cv5.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 void ADC_init()
 	{

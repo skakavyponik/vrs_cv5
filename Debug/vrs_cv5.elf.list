@@ -4291,9 +4291,9 @@ int siprintf(char *buf, const char *fmt, ...)
  800196a:	4770      	bx	lr
 
 0800196c <ADC_init>:
+ */
 #include <vrs_cv5.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 void ADC_init()
 	{
