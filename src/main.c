@@ -79,7 +79,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	  for(int i = 0; i < 100000;i++);
+	  for(int i = 0; i < 4000;i++);
 	  if (Rec == 'm')
 	  {
 		  m =! m;
@@ -92,9 +92,9 @@ int main(void)
 	  else
 	  {
 		  V_value= value*ad_const;
-		  sprintf(send,"%d.%dV", (int)V_value, ((int)(V_value*100))-(int)V_value);
+		  sprintf(send,"%d.%dV", (int)V_value, ((int)((V_value-(int)V_value)*100)));
 	  }
-	  Send_data(send);
+	  USARTp_start(send);
 
   }
   return 0;

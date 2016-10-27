@@ -18,6 +18,7 @@
 int value;
 char Rec;
 char send[8];
+int j;
 
 
 void ADC_init();
@@ -25,6 +26,7 @@ void Dio_init();
 void usart_init();
 void blikanie(uint32_t cas);
 void Send_data(char send[]);
+void USARTp_start(char send[]);
 
 
 #endif /* VRS_CV5_H_ */

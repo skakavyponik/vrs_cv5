@@ -126,6 +126,7 @@ void usart_init()
 		NVIC_Init(&NVIC_InitStructure);
 
 		//interrupt
+		USART_ITConfig(USART2, USART_IT_TC, ENABLE);
 		USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
 
 		USART_Cmd(USART2, ENABLE);
@@ -145,6 +146,13 @@ void Send_data(char send[])
 	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 }
 
+void USARTp_start(char send[]){
+	if (j == 0){
+		USART_SendData(USART2,send[j]);
+		j++;
+	}
+}
+
 void USART2_IRQHandler(void)
 {
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
@@ -152,4 +160,20 @@ void USART2_IRQHandler(void)
 		USART_ClearITPendingBit(USART2, USART_IT_RXNE);
 		Rec = USART_ReceiveData(USART2);
     }
+	else if(USART_GetITStatus(USART2, USART_IT_TC) != RESET)
+		{
+			USART_ClearITPendingBit(USART2, USART_IT_TC);
+			if (j > 0)
+			{
+				if(send[j] != '\0')
+				{
+					USART_SendData(USART2,send[j]);
+					j++;
+				}
+				else{
+					USART_SendData(USART2,'\r');
+					j = 0;
+				}
+			}
+		}
 }
